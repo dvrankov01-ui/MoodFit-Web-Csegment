@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodFit - Ulagajte u Mentalno Zdravlje</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #e0f7fa, #b2ebf2); color: #333; }
+        header { background: #00796b; color: white; text-align: center; padding: 50px 20px; }
+        section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+        .invest { background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; padding: 20px; }
+        canvas { max-width: 100%; height: 300px; }
+        form { display: flex; flex-direction: column; max-width: 500px; margin: auto; }
+        input, textarea, button { padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #00796b; color: white; cursor: pointer; }
+        footer { background: #00796b; color: white; text-align: center; padding: 20px; }
+        @media (max-width: 768px) { section { padding: 20px 10px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ulagajte u MoodFit</h1>
+        <p>Budućnost mentalnog zdravlja počinje ovdje. Pridružite se kao investitor!</p>
+    </header>
+
+    <section id="opis">
+        <h2>O MoodFit Aplikaciji</h2>
+        <p>MoodFit omogućuje dnevno bilježenje raspoloženja, grafove trendova, vježbe disanja i motivacijske poruke. Ciljana publika: učenici, studenti i zaposleni pod stresom.[file:1]</p>
+    </section>
+
+    <section id="plan">
+        <h2>Poslovni Plan</h2>
+        <div class="invest">
+            <h3>Monetizacija</h3>
+            <ul>
+                <li>Freemium: Premium pretplate (napredne analize, vođene vježbe).</li>
+                <li>Oglasi u free verziji.</li>
+                <li>Partnerstva s wellness brendovima.</li>
+                <li>Prodaja sadržaja (e-knjige, videi).</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="ulaganja">
+        <h2>Potrebna Ulaganja</h2>
+        <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+            <tr><th style="border:1px solid #ddd; padding:10px;">Kategorija</th><th style="border:1px solid #ddd; padding:10px;">Trošak (€)</th></tr>
+            <tr><td style="border:1px solid #ddd; padding:10px;">Razvoj aplikacije</td><td style="border:1px solid #ddd; padding:10px;">5.000 - 15.000</td></tr>
+            <tr><td style="border:1px solid #ddd; padding:10px;">Marketing</td><td style="border:1px solid #ddd; padding:10px;">2.000 - 4.000</td></tr>
+            <tr><td style="border:1px solid #ddd; padding:10px;">Održavanje (godišnje)</td><td style="border:1px solid #ddd; padding:10px;">1.000</td></tr>
+        </table>[file:1]
+    </section>
+
+    <section id="prihodi">
+        <h2>Potencijalni Prihodi</h2>
+        <canvas id="prihodChart"></canvas>
+        <p>Procjena za 1.000 premium korisnika + oglasi/partnerstva.[file:1]</p>
+    </section>
+
+    <section id="kontakt">
+        <h2>Zainteresirani za Ulaganje?</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Ime i Prezime" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Poruka / Iznos ulaganja" rows="5" required></textarea>
+            <button type="submit">Pošalji Upit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Dario Vrankovečki - MoodFit Projekt. Mentor: Goran Gomaž.</p>
+    </footer>
+
+    <script>
+        // Simulirani grafikon prihoda
+        const ctx = document.getElementById('prihodChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Pretplate', 'Oglasi', 'Partnerstva'],
+                datasets: [{ label: 'Mjesecni prihod (€)', data: [4500, 900, 1750], backgroundColor: ['#00796b', '#4db6ac', '#26a69a'] }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        // Forma submit
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Upit poslan! Hvala na interesu.');
+        });
+    </script>
+</body>
+</html>
