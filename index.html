@@ -6,14 +6,18 @@
     <title>MoodFit - Ulagajte u Mentalno Zdravlje</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #e0f7fa, #b2ebf2); color: #333; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom, #e0f7fa, #b2ebf2); color: #333; line-height: 1.6; }
         header { background: #00796b; color: white; text-align: center; padding: 50px 20px; }
         section { padding: 40px 20px; max-width: 1200px; margin: auto; }
         .invest { background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0; padding: 20px; }
         canvas { max-width: 100%; height: 300px; }
         form { display: flex; flex-direction: column; max-width: 500px; margin: auto; }
-        input, textarea, button { padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #00796b; color: white; cursor: pointer; }
+        input, textarea, button { padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { background: #00796b; color: white; cursor: pointer; border: none; }
+        button:hover { background: #004d40; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #e0f2e9; }
         footer { background: #00796b; color: white; text-align: center; padding: 20px; }
         @media (max-width: 768px) { section { padding: 20px 10px; } }
     </style>
@@ -26,69 +30,77 @@
 
     <section id="opis">
         <h2>O MoodFit Aplikaciji</h2>
-        <p>MoodFit omogućuje dnevno bilježenje raspoloženja, grafove trendova, vježbe disanja i motivacijske poruke. Ciljana publika: učenici, studenti i zaposleni pod stresom.[file:1]</p>
+        <p>MoodFit je mobilna aplikacija za praćenje raspoloženja: dnevno bilježenje, grafovi trendova, vježbe disanja i motivacijske poruke. Ciljana publika: učenici, studenti i zaposleni pod stresom.</p>
     </section>
 
     <section id="plan">
         <h2>Poslovni Plan</h2>
         <div class="invest">
-            <h3>Monetizacija</h3>
+            <h3>Strategija Monetizacije</h3>
             <ul>
-                <li>Freemium: Premium pretplate (napredne analize, vođene vježbe).</li>
-                <li>Oglasi u free verziji.</li>
-                <li>Partnerstva s wellness brendovima.</li>
-                <li>Prodaja sadržaja (e-knjige, videi).</li>
+                <li><strong>Freemium model:</strong> Osnovno besplatno, premium pretplate (3-6 €/mj).</li>
+                <li><strong>Oglasi:</strong> Neljetni u free verziji.</li>
+                <li><strong>Partnerstva:</strong> Wellness brendovi i psiholozi.</li>
+                <li><strong>Dodatno:</strong> Prodaja vježbi i e-knjiga.</li>
             </ul>
         </div>
     </section>
 
     <section id="ulaganja">
         <h2>Potrebna Ulaganja</h2>
-        <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
-            <tr><th style="border:1px solid #ddd; padding:10px;">Kategorija</th><th style="border:1px solid #ddd; padding:10px;">Trošak (€)</th></tr>
-            <tr><td style="border:1px solid #ddd; padding:10px;">Razvoj aplikacije</td><td style="border:1px solid #ddd; padding:10px;">5.000 - 15.000</td></tr>
-            <tr><td style="border:1px solid #ddd; padding:10px;">Marketing</td><td style="border:1px solid #ddd; padding:10px;">2.000 - 4.000</td></tr>
-            <tr><td style="border:1px solid #ddd; padding:10px;">Održavanje (godišnje)</td><td style="border:1px solid #ddd; padding:10px;">1.000</td></tr>
-        </table>[file:1]
+        <table>
+            <tr><th>Kategorija</th><th>Procjena Troška (€)</th></tr>
+            <tr><td>Razvoj aplikacije (programeri, dizajn, testovi)</td><td>5.000 - 15.000</td></tr>
+            <tr><td>Marketing i promocija (social media, influenceri)</td><td>2.000 - 4.000</td></tr>
+            <tr><td>Održavanje (serveri, update-i, godišnje)</td><td>1.000</td></tr>
+        </table>
     </section>
 
     <section id="prihodi">
-        <h2>Potencijalni Prihodi</h2>
+        <h2>Potencijalni Prihodi (mjesecno)</h2>
         <canvas id="prihodChart"></canvas>
-        <p>Procjena za 1.000 premium korisnika + oglasi/partnerstva.[file:1]</p>
+        <p>Primjer za 1.000 aktivnih korisnika: pretplate, oglasi i partnerstva.</p>
     </section>
 
     <section id="kontakt">
         <h2>Zainteresirani za Ulaganje?</h2>
+        <p>Unesite podatke za kontakt – odgovorit ću u 24h.</p>
         <form id="contactForm">
             <input type="text" placeholder="Ime i Prezime" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Poruka / Iznos ulaganja" rows="5" required></textarea>
+            <input type="email" placeholder="Email adresa" required>
+            <textarea placeholder="Vaša poruka ili iznos ulaganja (€)" rows="5" required></textarea>
             <button type="submit">Pošalji Upit</button>
         </form>
     </section>
 
     <footer>
-        <p>&copy; 2026 Dario Vrankovečki - MoodFit Projekt. Mentor: Goran Gomaž.</p>
+        <p>&copy; 2026 Dario Vrankovečki | MoodFit Projekt | Rudjer Bošković, Zagreb | Mentor: Goran Gomaž</p>
     </footer>
 
     <script>
-        // Simulirani grafikon prihoda
         const ctx = document.getElementById('prihodChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Pretplate', 'Oglasi', 'Partnerstva'],
-                datasets: [{ label: 'Mjesecni prihod (€)', data: [4500, 900, 1750], backgroundColor: ['#00796b', '#4db6ac', '#26a69a'] }]
+                datasets: [{ 
+                    label: 'Mjesecni prihod (€)', 
+                    data: [4500, 900, 1750], 
+                    backgroundColor: ['#00796b', '#4db6ac', '#26a69a'],
+                    borderRadius: 5
+                }]
             },
-            options: { scales: { y: { beginAtZero: true } } }
+            options: { 
+                responsive: true,
+                scales: { y: { beginAtZero: true } } 
+            }
         });
 
-        // Forma submit
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Upit poslan! Hvala na interesu.');
+            alert('Hvala! Upit za ulaganje u MoodFit poslan. Kontaktirat ću vas uskoro.');
         });
     </script>
 </body>
 </html>
+
