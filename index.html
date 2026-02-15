@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 }
 header { 
-    background: linear-gradient(135deg, rgba(0,121,107,0.95), rgba(0,77,64,0.95)); 
+    background: linear-gradient(135deg, rgba(0,121,107,0.98), rgba(0,77,64,0.98)); 
     color: white; 
     text-align: center; 
     padding: 120px 20px 80px; 
@@ -33,7 +33,7 @@ header::before {
 }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-.hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 600px; margin: 0 auto; opacity: 0.95; }
+.hero-subtitle { font-size: 1.3rem; font-weight: 300; max-width: 600px; margin: 0 auto 30px; opacity: 0.95; }
 .cta-button { 
     display: inline-block; 
     background: linear-gradient(45deg, #ff6b6b, #feca57); 
@@ -43,9 +43,10 @@ header::before {
     text-decoration: none; 
     font-weight: 600; 
     font-size: 1.1rem; 
-    margin-top: 30px; 
     box-shadow: 0 10px 30px rgba(255,107,107,0.4); 
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
 }
 .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
 section { padding: 100px 20px; max-width: 1400px; margin: auto; }
@@ -70,111 +71,138 @@ section { padding: 100px 20px; max-width: 1400px; margin: auto; }
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border-radius: 2px;
 }
+/* POBOLJŠANI KONTRAST ZA SVJETLE SEKCIJE */
+.high-contrast-bg {
+    background: rgba(255,255,255,0.98) !important;
+    position: relative;
+}
+.high-contrast-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+    border-radius: 25px;
+    z-index: -1;
+}
 .card { 
-    background: rgba(255,255,255,0.95); 
+    background: rgba(255,255,255,0.98); 
     backdrop-filter: blur(20px); 
     border-radius: 25px; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15); 
-    padding: 40px; 
+    box-shadow: 0 25px 70px rgba(0,0,0,0.2); 
+    padding: 50px; 
     margin: 20px auto; 
-    max-width: 900px; 
+    max-width: 1000px; 
     transition: all 0.4s ease;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    position: relative;
 }
-.card:hover { transform: translateY(-10px); box-shadow: 0 30px 80px rgba(0,0,0,0.25); }
+.card:hover { transform: translateY(-10px); box-shadow: 0 35px 90px rgba(0,0,0,0.3); }
+.card h3, .card h4 { color: #2d3748 !important; }
 .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
 .feature-card { 
-    background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); 
-    padding: 30px; 
+    background: linear-gradient(135deg, rgba(102,126,234,0.08), rgba(118,75,162,0.08)); 
+    padding: 35px; 
     border-radius: 20px; 
     text-align: center; 
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(102,126,234,0.2);
     transition: all 0.3s ease;
+    color: #2d3748;
 }
-.feature-card:hover { transform: scale(1.05); background: linear-gradient(135deg, rgba(102,126,234,0.2), rgba(118,75,162,0.2)); }
+.feature-card:hover { transform: scale(1.05); background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15)); }
 .feature-icon { font-size: 3rem; color: #667eea; margin-bottom: 20px; }
 table { 
     width: 100%; 
     background: white; 
     border-radius: 20px; 
     overflow: hidden; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+    box-shadow: 0 15px 50px rgba(0,0,0,0.15); 
     margin: 30px 0;
 }
 th { 
-    background: linear-gradient(135deg, #667eea, #764ba2); 
-    color: white; 
-    padding: 20px; 
-    font-weight: 600; 
+    background: linear-gradient(135deg, #1a365d, #2d3748) !important; 
+    color: white !important; 
+    padding: 22px; 
+    font-weight: 700; 
     text-align: left;
 }
 td { 
-    padding: 20px; 
-    border-bottom: 1px solid #f0f0f0; 
+    padding: 22px; 
+    border-bottom: 1px solid #e2e8f0; 
     font-weight: 500;
+    color: #2d3748;
 }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(102,126,234,0.05); }
+tr:hover td { background: rgba(102,126,234,0.08); }
 .chart-container { 
     background: white; 
     border-radius: 25px; 
-    padding: 40px; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15); 
+    padding: 50px; 
+    box-shadow: 0 25px 70px rgba(0,0,0,0.2); 
     margin: 30px 0;
 }
 .form-container { 
     max-width: 700px; 
     margin: auto; 
-    background: rgba(255,255,255,0.95); 
+    background: rgba(255,255,255,0.98); 
     backdrop-filter: blur(20px); 
-    padding: 50px; 
+    padding: 60px; 
     border-radius: 25px; 
-    box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+    box-shadow: 0 35px 90px rgba(0,0,0,0.25);
 }
 .form-group { margin-bottom: 25px; }
 input, textarea { 
     width: 100%; 
     padding: 20px; 
-    border: 2px solid #e0e0e0; 
+    border: 2px solid #e2e8f0; 
     border-radius: 15px; 
     font-size: 16px; 
     font-family: 'Poppins', sans-serif; 
     transition: all 0.3s ease;
-    background: rgba(255,255,255,0.9);
+    background: white;
+    color: #2d3748;
 }
 input:focus, textarea:focus { 
     outline: none; 
     border-color: #667eea; 
-    box-shadow: 0 0 0 4px rgba(102,126,234,0.1); 
+    box-shadow: 0 0 0 4px rgba(102,126,234,0.15); 
     transform: translateY(-2px);
 }
 .submit-btn { 
     background: linear-gradient(45deg, #ff6b6b, #feca57); 
     color: white; 
-    padding: 20px 50px; 
+    padding: 22px 50px; 
     border: none; 
     border-radius: 15px; 
     font-size: 1.2rem; 
-    font-weight: 600; 
+    font-weight: 700; 
     cursor: pointer; 
     width: 100%; 
     transition: all 0.3s ease;
 }
-.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.4); }
+.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(255,107,107,0.5); }
 footer { 
-    background: rgba(0,121,107,0.95); 
+    background: linear-gradient(135deg, #1a365d, #2d3748); 
     color: white; 
     text-align: center; 
-    padding: 40px 20px; 
-    position: relative;
+    padding: 60px 20px 40px; 
 }
-.footer-content { max-width: 800px; margin: auto; }
+.footer-content { max-width: 1000px; margin: auto; }
+.school-name { 
+    font-size: 1.3rem; 
+    font-weight: 600; 
+    margin-top: 30px; 
+    padding: 20px; 
+    background: rgba(255,255,255,0.1); 
+    border-radius: 15px; 
+    backdrop-filter: blur(10px);
+}
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .card, .feature-card, .form-container { animation: fadeInUp 0.8s ease forwards; }
 @media (max-width: 768px) { 
-    section { padding: 60px 20px; } 
-    .card, .form-container { padding: 30px 25px; }
+    section { padding: 70px 20px; } 
+    .card, .form-container { padding: 40px 30px; }
     .hero-title { font-size: 2.5rem; }
+    footer { padding: 40px 20px 30px; }
 }
 .pulse { animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,107,107,0.7); } 70% { box-shadow: 0 0 0 20px rgba(255,107,107,0); } 100% { box-shadow: 0 0 0 0 rgba(255,107,107,0); } }
@@ -211,10 +239,10 @@ footer {
     </div>
 </section>
 
-<section id="plan" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+<section id="plan" class="high-contrast-bg">
     <h2 class="section-title">Poslovni Plan</h2>
     <div class="card">
-        <h3 style="font-size: 2rem; text-align: center; margin-bottom: 40px; color: #667eea;"><i class="fas fa-bullseye"></i> Strategija Monetizacije</h3>
+        <h3 style="font-size: 2rem; text-align: center; margin-bottom: 40px; color: #1a365d !important;"><i class="fas fa-bullseye"></i> Strategija Monetizacije</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
             <div class="feature-card">
                 <div class="feature-icon" style="color: #ff6b6b;"><i class="fas fa-crown"></i></div>
@@ -252,28 +280,28 @@ footer {
             <tr><td>Serveri, update-i, podrška</td><td><strong>1.000</strong></td></tr>
         </table>
         <div style="text-align: center; margin-top: 30px;">
-            <p style="font-size: 1.2rem; color: #667eea; font-weight: 600;">UKUPNO: <strong>8.000 - 20.000 €</strong></p>
+            <p style="font-size: 1.3rem; color: #1a365d; font-weight: 700;">UKUPNO: <strong>8.000 - 20.000 €</strong></p>
         </div>
     </div>
 </section>
 
-<section id="prihodi" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+<section id="prihodi" class="high-contrast-bg">
     <h2 class="section-title">Potencijalni Prihodi</h2>
     <div class="card">
         <div class="chart-container">
             <canvas id="prihodChart"></canvas>
         </div>
-        <p style="text-align: center; font-size: 1.3rem; margin-top: 30px;">
+        <p style="text-align: center; font-size: 1.3rem; margin-top: 30px; color: #2d3748;">
             <strong>Za 1.000 aktivnih korisnika:</strong> 7.150€ <strong>mjesecno</strong><br>
             <span style="color: #667eea; font-size: 1.1rem;">ROI u manje od 3 mjeseca!</span>
         </p>
     </div>
 </section>
 
-<section id="kontakt">
+<section id="kontakt" class="high-contrast-bg">
     <h2 class="section-title">Zainteresirani za Ulaganje?</h2>
     <div class="form-container">
-        <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px; color: #666;">
+        <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px; color: #2d3748;">
             Unesite podatke i odgovorit ću u <strong>24h</strong> s detaljnim planom
         </p>
         <form id="contactForm">
@@ -298,11 +326,15 @@ footer {
 
 <footer>
     <div class="footer-content">
-        <p style="font-size: 1.1rem; margin-bottom: 10px;">
+        <p style="font-size: 1.1rem; margin-bottom: 15px;">
             <i class="fas fa-heart" style="color: #ff6b6b;"></i> 
             &copy; 2026 Dario Vrankovečki | MoodFit Projekt
         </p>
-        <p>Škola Rudera Boškovića, Zagreb | Mentor: Goran Gomaz</p>
+        <p style="font-size: 1rem; margin-bottom: 20px;">Mentor: Goran Gomaz</p>
+        <div class="school-name">
+            <strong>Tehnička škola Ruđera Boškovića</strong><br>
+            Zagreb, Hrvatska
+        </div>
     </div>
 </footer>
 
@@ -330,12 +362,12 @@ new Chart(ctx, {
         scales: { 
             y: { 
                 beginAtZero: true,
-                grid: { color: 'rgba(0,0,0,0.05)' },
-                ticks: { font: { size: 14, weight: '600' } }
+                grid: { color: 'rgba(0,0,0,0.08)' },
+                ticks: { font: { size: 14, weight: '600' }, color: '#2d3748' }
             },
             x: {
                 grid: { display: false },
-                ticks: { font: { size: 14, weight: '600' } }
+                ticks: { font: { size: 14, weight: '600' }, color: '#2d3748' }
             }
         },
         animation: {
@@ -359,10 +391,16 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     }, 1500);
 });
 
-// Smooth scroll za CTA
+// POPRAVLJEN SMOOTH SCROLL - radi 100%
 document.querySelector('.cta-button').addEventListener('click', function(e) {
     e.preventDefault();
-    document.getElementById('kontakt').scrollIntoView({ behavior: 'smooth' });
+    const kontaktSection = document.getElementById('kontakt');
+    if (kontaktSection) {
+        kontaktSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
 });
 </script>
 </body>
