@@ -14,117 +14,396 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #2d3748;
+    background: radial-gradient(circle at top, #101827 0%, #050816 40%, #02010a 100%);
+    color: #e2e8f0;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, rgba(0,121,107,0.98), rgba(0,77,64,0.98));
-    color: white;
-    text-align: center;
-    padding: 120px 20px 80px;
-    position: relative;
-    overflow: hidden;
-}
-header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23fff" opacity="0.1"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" opacity="0.3"/><circle cx="75" cy="75" r="1.5" opacity="0.2"/><circle cx="50" cy="10" r="0.8" opacity="0.4"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-    animation: float 20s ease-in-out infinite;
-}
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-.hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 2;
-}
-.hero-subtitle {
-    font-size: 1.3rem;
-    font-weight: 300;
-    max-width: 650px;
-    margin: 0 auto 30px;
-    opacity: 0.95;
-    position: relative;
-    z-index: 2;
-}
-.cta-button {
-    display: inline-block;
-    background: linear-gradient(45deg, #ff6b6b, #feca57);
-    color: white;
-    padding: 18px 40px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 3;
-}
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255,107,107,0.6);
-}
-
-/* SECTIONS */
-section {
-    padding: 100px 20px;
-    max-width: 1400px;
-    margin: auto;
-}
-
-.section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    text-align: center;
-    margin-bottom: 60px;
-    font-weight: 700;
-    position: relative;
-}
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
+/* GLASS NAV + STICKY INVEST BTN */
+.navbar {
+    position: fixed;
+    top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(45deg, #ff6b6b, #feca57);
-    border-radius: 2px;
+    width: min(1100px, 100% - 32px);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: radial-gradient(circle at top left, rgba(96,165,250,0.22), rgba(17,24,39,0.92));
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+    border: 1px solid rgba(148,163,184,0.6);
+    backdrop-filter: blur(18px);
+}
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: 0.98rem;
+}
+.nav-logo span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 0, #f97316, #ef4444);
+    box-shadow: 0 0 18px rgba(248,113,113,0.7);
+}
+.nav-links {
+    display: flex;
+    gap: 18px;
+    font-size: 0.9rem;
+}
+.nav-links a {
+    color: #cbd5f5;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+}
+.nav-links a:hover {
+    background: rgba(148,163,184,0.18);
+    color: #f9fafb;
+}
+.nav-invest {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 18px 40px rgba(236,72,153,0.7);
+    transition: all 0.2s ease;
+}
+.nav-invest:hover {
+    transform: translateY(-1px) scale(1.02);
 }
 
-/* BIJELE SEKCIJE + TAMNI NASLOVI = MAX KONTRAST */
-.high-contrast-section {
-    background: rgba(255,255,255,0.98);
+/* HERO – 3D WAVE BACKGROUND */
+.hero {
     position: relative;
-    border-radius: 25px;
-    margin-top: 60px;
-    box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 80px;
+    overflow: hidden;
 }
-.section-title-high-contrast {
-    background: linear-gradient(45deg, #1a365d, #2d3748);
+.hero-inner {
+    position: relative;
+    width: min(1200px, 100%);
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+    gap: 40px;
+    align-items: center;
+    z-index: 2;
+}
+.hero-title {
+    font-size: clamp(2.8rem, 5vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+}
+.hero-gradient {
+    background: linear-gradient(90deg, #38bdf8, #8b5cf6, #f97316);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: #1a365d;
+}
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: #cbd5f5;
+    max-width: 520px;
+    margin-bottom: 26px;
+}
+.hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+.hero-pill {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.6);
+    color: #e5e7eb;
+    background: rgba(15,23,42,0.85);
+}
+.hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+}
+.hero-main-btn {
+    padding: 15px 32px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #22c55e, #14b8a6);
+    color: #ecfeff;
+    font-weight: 700;
+    font-size: 0.98rem;
+    box-shadow: 0 20px 45px rgba(34,197,94,0.6);
+    cursor: pointer;
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+.hero-main-btn:hover { transform: translateY(-2px) scale(1.02); }
+
+.hero-sec-btn {
+    border-radius: 999px;
+    padding: 11px 18px;
+    background: rgba(15,23,42,0.75);
+    border: 1px solid rgba(148,163,184,0.7);
+    color: #e5e7eb;
+    font-size: 0.86rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* VIDEO BLOK – JAK KONTRAST, UVIJEK VIDLJIV */
-.video-container {
+/* FLOATING METRICS CARD */
+.metrics-card {
+    background: radial-gradient(circle at top, rgba(56,189,248,0.28), rgba(15,23,42,0.96));
+    border-radius: 22px;
+    padding: 18px 18px 16px;
+    border: 1px solid rgba(148,163,184,0.7);
+    box-shadow: 0 24px 50px rgba(15,23,42,0.9);
+    width: 290px;
+    font-size: 0.8rem;
+}
+.metrics-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+.metric-item span:first-child {
+    display: block;
+    font-size: 0.7rem;
+    color: #9ca3af;
+}
+.metric-item span:last-child {
+    font-weight: 600;
+    color: #e5e7eb;
+}
+.metric-pill {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: rgba(22,163,74,0.18);
+    border: 1px solid rgba(34,197,94,0.6);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* RIGHT HERO – 3D GLASS PHONE MOCK */
+.hero-mock {
     position: relative;
-    max-width: 900px;
-    margin: 40px auto 0;
-    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+}
+.phone-shell {
+    position: relative;
+    width: 260px;
+    height: 520px;
+    border-radius: 40px;
+    padding: 14px;
+    background: linear-gradient(160deg, #4f46e5, #0f172a);
+    box-shadow: 0 40px 90px rgba(15,23,42,0.9);
+}
+.phone-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    background: radial-gradient(circle at top, #0ea5e9, #0f172a 55%);
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #f9fafb;
+}
+.phone-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+.phone-mood-badge {
+    align-self: flex-start;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(15,23,42,0.7);
+    font-size: 0.72rem;
+}
+.phone-graph {
+    margin-top: 6px;
+    flex: 1;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(30,64,175,0.9));
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 30px 90px rgba(0,0,0,0.35);
-    background: #000;
+}
+.phone-graph::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 10%, rgba(56,189,248,0.5), transparent 55%),
+                radial-gradient(circle at 80% 80%, rgba(244,114,182,0.5), transparent 55%);
+    opacity: 0.7;
+}
+.phone-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 8px;
+    margin-top: 2px;
+}
+.phone-chip {
+    border-radius: 12px;
+    background: rgba(15,23,42,0.92);
+    font-size: 0.7rem;
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* BACKGROUND WAVES */
+.hero-wave {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(59,130,246,0.38), transparent 55%),
+      radial-gradient(circle at 90% 10%, rgba(236,72,153,0.45), transparent 60%),
+      radial-gradient(circle at 50% 95%, rgba(34,197,94,0.32), transparent 55%);
+    opacity: 0.82;
+    filter: blur(2px);
+    z-index: 0;
+}
+
+/* GENERIC SECTIONS */
+section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-card {
+    background: radial-gradient(circle at top left, rgba(59,130,246,0.18), rgba(15,23,42,0.96));
+    border-radius: 32px;
+    border: 1px solid rgba(148,163,184,0.7);
+    box-shadow: 0 24px 70px rgba(15,23,42,0.95);
+    padding: 40px 34px 42px;
+    position: relative;
+    overflow: hidden;
+}
+.section-title {
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+}
+.section-sub {
+    font-size: 0.95rem;
+    color: #cbd5f5;
+    margin-bottom: 28px;
+}
+
+/* FEATURE GRID */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+    margin-top: 18px;
+}
+.feature-card {
+    background: rgba(15,23,42,0.92);
+    border-radius: 20px;
+    border: 1px solid rgba(148,163,184,0.7);
+    padding: 20px 18px;
+    text-align: left;
+    font-size: 0.9rem;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+}
+.feature-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #38bdf8, #4f46e5);
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* INVESTMENT TABLE */
+.cost-table-wrapper {
+    margin-top: 16px;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(148,163,184,0.8);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15,23,42,0.98);
+}
+th, td {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+}
+th {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e5e7eb;
+    text-align: left;
+}
+td {
+    border-top: 1px solid rgba(55,65,81,0.9);
+    color: #d1d5db;
+}
+tr:nth-child(even) td {
+    background: rgba(15,23,42,0.9);
+}
+.total-row {
+    text-align: center;
+    padding: 16px 0 6px;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* CHART */
+.chart-container {
+    margin-top: 18px;
+    border-radius: 24px;
+    padding: 28px 24px;
+    background: rgba(15,23,42,0.96);
+    border: 1px solid rgba(148,163,184,0.7);
+    height: 320px;
+}
+
+/* CINEMATIC VIDEO SECTION */
+.video-shell {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 32px 90px rgba(0,0,0,0.85);
+    border: 1px solid rgba(148,163,184,0.7);
+    background: #020617;
 }
 .video-wrapper {
     position: relative;
@@ -133,379 +412,351 @@ section {
 }
 .video-wrapper iframe {
     position: absolute;
-    top: 0; left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     border: none;
 }
-.video-title {
-    text-align: center;
-    font-size: 1.25rem;
-    color: #2d3748;
-    margin: 20px auto 0;
-    font-weight: 600;
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 10% 0, rgba(59,130,246,0.29), transparent 60%),
+                radial-gradient(circle at 90% 100%, rgba(236,72,153,0.4), transparent 60%);
 }
 
-/* CARDS */
-.card {
-    background: rgba(255,255,255,0.98);
-    border-radius: 25px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    padding: 50px;
-    margin: 40px auto 0;
-    max-width: 1100px;
-    border: 1px solid rgba(226,232,240,0.9);
-}
-
-/* FEATURES */
-.feature-grid {
+/* CONTACT FORM */
+.form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
+    grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+    gap: 30px;
+    align-items: flex-start;
 }
-.feature-card {
-    background: #f7fafc;
-    padding: 32px 26px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid #e2e8f0;
-    transition: all 0.25s ease;
+.form-card {
+    background: rgba(15,23,42,0.96);
+    border-radius: 22px;
+    border: 1px solid rgba(148,163,184,0.75);
+    padding: 24px 22px;
 }
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    background: #edf2f7;
-}
-.feature-icon {
-    font-size: 2.6rem;
-    color: #667eea;
-    margin-bottom: 16px;
-}
-
-/* TABLICA ULAGANJA – KONTRAST */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    border-radius: 20px;
-    overflow: hidden;
-}
-th {
-    background: linear-gradient(135deg, #1a365d, #2d3748);
-    color: #f7fafc;
-    padding: 18px 20px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 0.98rem;
-}
-td {
-    padding: 18px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.98rem;
-}
-tr:nth-child(even) td {
-    background: #f8fafc;
-}
-tr:hover td {
-    background: #e6f0ff;
-}
-
-/* CHART */
-.chart-container {
-    background: #ffffff;
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-    margin-top: 10px;
-    height: 380px;
-}
-
-/* FORMA */
-.form-container {
-    max-width: 800px;
-    margin: 40px auto 0;
-    background: #ffffff;
-    padding: 50px;
-    border-radius: 25px;
-    box-shadow: 0 25px 70px rgba(0,0,0,0.2);
-    border: 1px solid #e2e8f0;
-}
-.form-group { margin-bottom: 20px; }
+.form-group { margin-bottom: 16px; }
 input, textarea {
     width: 100%;
-    padding: 16px 18px;
+    padding: 11px 12px;
     border-radius: 14px;
-    border: 2px solid #e2e8f0;
-    font-size: 15px;
+    border: 1px solid rgba(148,163,184,0.65);
+    background: rgba(15,23,42,0.9);
+    color: #e5e7eb;
+    font-size: 0.9rem;
     font-family: 'Poppins', sans-serif;
-    background: #f7fafc;
-    transition: all 0.2s ease;
-    color: #2d3748;
 }
-input::placeholder, textarea::placeholder { color: #a0aec0; }
+input::placeholder, textarea::placeholder { color: #6b7280; }
 input:focus, textarea:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102,126,234,0.25);
-    background: #ffffff;
-}
-
-/* BUTTONI */
-.submit-btn {
-    background: linear-gradient(45deg, #ff6b6b, #feca57);
-    color: white;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 14px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.25s ease;
-}
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 45px rgba(255,107,107,0.5);
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56,189,248,0.4);
 }
 
 /* FOOTER */
 footer {
-    background: linear-gradient(135deg, #1a365d, #2d3748);
-    color: white;
+    padding: 40px 20px 30px;
     text-align: center;
-    padding: 55px 20px 40px;
-    margin-top: 80px;
-}
-.footer-content {
-    max-width: 1000px;
-    margin: auto;
-}
-.school-name {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-top: 26px;
-    padding: 22px;
-    background: rgba(255,255,255,0.14);
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
-/* ANIMACIJE */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(26px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.card, .feature-card, .form-container, .video-container {
-    animation: fadeInUp 0.7s ease forwards;
-}
-.pulse {
-    animation: pulse 2s infinite;
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255,107,107,0.7); }
-    70% { box-shadow: 0 0 0 20px rgba(255,107,107,0); }
-    100% { box-shadow: 0 0 0 0 rgba(255,107,107,0); }
+    font-size: 0.85rem;
+    color: #9ca3af;
 }
 
 /* RESPONSIVE */
-@media (max-width: 992px) {
-    .card, .form-container { padding: 40px 30px; }
+@media (max-width: 960px) {
+    .hero-inner {
+        grid-template-columns: minmax(0,1fr);
+        text-align: left;
+    }
+    .hero-mock {
+        order: -1;
+        margin-bottom: 16px;
+    }
 }
 @media (max-width: 768px) {
-    header { padding: 90px 18px 60px; }
-    section { padding: 75px 15px; }
-    .hero-title { font-size: 2.4rem; }
+    .navbar {
+        padding: 10px 14px;
+        gap: 10px;
+    }
+    .nav-links { display: none; }
+    .section-card { padding: 30px 22px 32px; }
+    section { padding: 70px 16px; }
 }
 </style>
 </head>
 <body>
 
-<header>
-    <h1 class="hero-title">Ulagajte u MoodFit</h1>
-    <p class="hero-subtitle">
-        Budućnost mentalnog zdravlja počinje ovdje. Pridružite se kao investitor i pomozite mladima da pronađu unutarnji mir.
-    </p>
-    <a href="#kontakt" class="cta-button pulse"><i class="fas fa-rocket"></i> Postani Investitor Sada</a>
-</header>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-logo">
+        <span><i class="fas fa-wave-square"></i></span>
+        MoodFit Pitch
+    </div>
+    <div class="nav-links">
+        <a href="#opis">Aplikacija</a>
+        <a href="#ulaganja">Ulaganja</a>
+        <a href="#prihodi">Prihodi</a>
+        <a href="#video">Demo</a>
+    </div>
+    <button class="nav-invest" onclick="scrollToSection('kontakt')">
+        <i class="fas fa-rocket"></i> Investiraj
+    </button>
+</div>
 
-<!-- O APLIKACIJI + VIDEO -->
-<section id="opis" class="high-contrast-section">
-    <h2 class="section-title section-title-high-contrast">O MoodFit Aplikaciji</h2>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-wave"></div>
 
-    <!-- VIDEO – SKROZ JASAN, U SVOJOJ BIJELOJ SEKCIJI -->
-    <div class="video-container">
-        <div class="video-wrapper">
-            <iframe
-                src="https://www.youtube.com/embed/U49gU7dnkiI"
-                title="MyMentalHealth App Demo - AI podrška za mlade (slično MoodFit)"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
+    <div class="hero-inner">
+        <div>
+            <h1 class="hero-title">
+                Uloži u <span class="hero-gradient">MoodFit</span>
+            </h1>
+            <p class="hero-subtitle">
+                Prva AI aplikacija iz školskih klupa Zagreba koja pretvara stres mladih u podatke, navike i profitabilan digitalni proizvod.
+            </p>
+
+            <div class="hero-pills">
+                <div class="hero-pill"><i class="fas fa-bolt"></i> AI motivacijske poruke</div>
+                <div class="hero-pill"><i class="fas fa-heart-rate"></i> Vježbe disanja</div>
+                <div class="hero-pill"><i class="fas fa-chart-line"></i> Grafovi raspoloženja</div>
+                <div class="hero-pill"><i class="fas fa-users"></i> Učenici & studenti</div>
+            </div>
+
+            <div class="hero-cta-row">
+                <button class="hero-main-btn" onclick="scrollToSection('kontakt')">
+                    <i class="fas fa-rocket"></i> Postani prvi investitor
+                </button>
+                <button class="hero-sec-btn" onclick="scrollToSection('video')">
+                    <i class="fas fa-play"></i> Pogledaj demo u 60s
+                </button>
+            </div>
+
+            <div style="margin-top:22px;">
+                <div class="metrics-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:0.8rem; color:#a5b4fc;">MoodFit projekcija</span>
+                        <span style="font-size:0.7rem; color:#9ca3af;">1.000 aktivnih korisnika</span>
+                    </div>
+                    <div class="metrics-row">
+                        <div class="metric-item">
+                            <span>Mjesečni prihod</span>
+                            <span>7.150 €</span>
+                        </div>
+                        <div class="metric-item">
+                            <span>Vrijeme povrata</span>
+                            <span>&lt; 3 mjeseca</span>
+                        </div>
+                    </div>
+                    <div class="metric-pill">
+                        <i class="fas fa-sparkles"></i>
+                        ROI za investitora već u prvoj godini.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-mock">
+            <div class="phone-shell">
+                <div class="phone-inner">
+                    <div class="phone-top">
+                        <span>MoodFit</span>
+                        <span>21:37</span>
+                    </div>
+                    <div class="phone-mood-badge">
+                        Današnji mood: 😊 smireno & fokusirano
+                    </div>
+                    <div class="phone-graph"></div>
+                    <div class="phone-bottom">
+                        <div class="phone-chip">
+                            <span>Disanje</span>
+                            <span style="font-size:0.68rem; color:#9ca3af;">4 min danas</span>
+                        </div>
+                        <div class="phone-chip">
+                            <span>Serije</span>
+                            <span style="font-size:0.68rem; color:#9ca3af;">7 dana streak</span>
+                        </div>
+                        <div class="phone-chip">
+                            <span>AI savjet</span>
+                            <span style="font-size:0.68rem; color:#9ca3af;">"Uzmi 3 minute za sebe."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <p class="video-title">
-        <i class="fas fa-play-circle"></i> Demo AI aplikacije za praćenje emocija i mentalno zdravlje mladih – baš kao MoodFit!
-    </p>
-
-    <div class="card">
-        <p>
-            <strong>MoodFit</strong> je mobilna aplikacija za praćenje raspoloženja koja kombinira dnevno bilježenje emocija,
-            napredne grafove trendova, personalizirane vježbe disanja i AI motivacijske poruke.
-            Ciljana publika su <strong>učenici, studenti i mladi profesionalci</strong> koji se bore sa stresom svakodnevice.
+<!-- O APLIKACIJI -->
+<section id="opis">
+    <div class="section-card">
+        <h2 class="section-title">Što je MoodFit?</h2>
+        <p class="section-sub">
+            MoodFit je mobilna aplikacija za praćenje raspoloženja koja kombinira dnevno bilježenje emocija,
+            vizualne trendove, vođene vježbe disanja i AI motivacijske poruke – dizajnirana za učenike,
+            studente i mlade profesionalce koji žive u konstantnom stresu.
         </p>
 
         <div class="feature-grid">
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Inteligentno Praćenje</h3>
-                <p>Automatski grafovi i trendovi vašeg raspoloženja kroz dane i tjedne.</p>
+                <h3 style="font-size:1.02rem; margin-bottom:4px;">Inteligentno praćenje</h3>
+                <p>Automatski grafovi koji prikazuju kako se raspoloženje mijenja kroz dane, tjedne i ispite.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-lungs"></i></div>
-                <h3>Vježbe Disanja</h3>
-                <p>Vođene sesije za trenutno smirenje u stresnim trenucima.</p>
+                <h3 style="font-size:1.02rem; margin-bottom:4px;">Vježbe disanja</h3>
+                <p>Instant vježbe za smirenje u 3 minute – prije ispita, prezentacije ili važnog razgovora.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-robot"></i></div>
-                <h3>AI Savjetnik</h3>
-                <p>Personalizirane motivacijske poruke i preporuke navika.</p>
+                <h3 style="font-size:1.02rem; margin-bottom:4px;">AI savjetnik</h3>
+                <p>Personalizirane poruke podrške koje prate korisnikov mood i navike spavanja.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3 style="font-size:1.02rem; margin-bottom:4px;">Fokus na mlade</h3>
+                <p>Posebno prilagođen terminima poput mature, kolokvija i studentskih rokova.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- POSLOVNI PLAN -->
-<section id="plan" class="high-contrast-section">
-    <h2 class="section-title section-title-high-contrast">Poslovni Plan</h2>
-    <div class="card">
-        <h3 style="font-size: 2rem; text-align: center; margin-bottom: 35px; color:#1a365d;">
-            <i class="fas fa-bullseye"></i> Strategija Monetizacije
-        </h3>
-
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon" style="color:#ff6b6b;"><i class="fas fa-crown"></i></div>
-                <h4>Freemium Model</h4>
-                <p>Osnovna verzija besplatna, premium pretplate 3–6 € mjesečno.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="color:#feca57;"><i class="fas fa-ad"></i></div>
-                <h4>Neupadljivi Oglasi</h4>
-                <p>Diskretni banneri u besplatnoj verziji bez prekidanja korisnika.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="color:#4ecdc4;"><i class="fas fa-handshake"></i></div>
-                <h4>Partnerstva</h4>
-                <p>Suradnja s wellness brendovima, psiholozima i školama.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon" style="color:#45b7d1;"><i class="fas fa-book"></i></div>
-                <h4>Dodatna Prodaja</h4>
-                <p>Premium vježbe, audio sesije, e-knjige i online radionice.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- POTREBNA ULAGANJA – NASLOV I TABLICA PUNO JAČI -->
-<section id="ulaganja" class="high-contrast-section">
-    <h2 class="section-title section-title-high-contrast">Potrebna Ulaganja</h2>
-
-    <div class="card">
-        <table>
-            <tr>
-                <th><i class="fas fa-code"></i> Razvoj aplikacije</th>
-                <th>Procjena Troška (€)</th>
-            </tr>
-            <tr>
-                <td>Programeri, dizajn, testiranje, App Store / Google Play objava</td>
-                <td><strong>5.000 – 15.000</strong></td>
-            </tr>
-
-            <tr>
-                <th><i class="fas fa-bullhorn"></i> Marketing &amp; Promocija</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Social media, TikTok/Instagram influenceri, Google Ads</td>
-                <td><strong>2.000 – 4.000</strong></td>
-            </tr>
-
-            <tr>
-                <th><i class="fas fa-server"></i> Održavanje (godišnje)</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>Serveri, update-i, korisnička podrška</td>
-                <td><strong>1.000</strong></td>
-            </tr>
-        </table>
-
-        <p style="text-align:center; font-size:1.25rem; margin-top:25px; color:#1a365d; font-weight:700;">
-            UKUPNO: <strong>8.000 – 20.000 €</strong>
+<!-- INVESTMENT -->
+<section id="ulaganja">
+    <div class="section-card">
+        <h2 class="section-title">Koliko treba uložiti?</h2>
+        <p class="section-sub">
+            Investicija pokriva razvoj aplikacije, lansiranje na App Store/Google Play, agresivan TikTok marketing
+            te održavanje servera i novih funkcionalnosti.
         </p>
+
+        <div class="cost-table-wrapper">
+            <table>
+                <tr>
+                    <th><i class="fas fa-code"></i> Razvoj aplikacije</th>
+                    <th>Procjena troška (€)</th>
+                </tr>
+                <tr>
+                    <td>Programeri, UI/UX dizajn, testiranje, objava na storeovima</td>
+                    <td><strong>5.000 – 15.000</strong></td>
+                </tr>
+                <tr>
+                    <th><i class="fas fa-bullhorn"></i> Marketing &amp; promocija</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>TikTok/Instagram influenceri, oglasi, kreativa za kampanje</td>
+                    <td><strong>2.000 – 4.000</strong></td>
+                </tr>
+                <tr>
+                    <th><i class="fas fa-server"></i> Održavanje (godišnje)</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Serveri, update-i, korisnička podrška</td>
+                    <td><strong>1.000</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="total-row">
+            UKUPNO: 8.000 – 20.000 €
+        </div>
     </div>
 </section>
 
-<!-- POTENCIJALNI PRIHODI -->
-<section id="prihodi" class="high-contrast-section">
-    <h2 class="section-title section-title-high-contrast">Potencijalni Prihodi</h2>
+<!-- PRIHODI -->
+<section id="prihodi">
+    <div class="section-card">
+        <h2 class="section-title">Potencijalni prihodi</h2>
+        <p class="section-sub">
+            Model kombinira freemium pretplate, neupadljive oglase i partnerstva s wellness brendovima.
+        </p>
 
-    <div class="card">
         <div class="chart-container">
             <canvas id="prihodChart"></canvas>
         </div>
 
-        <p style="text-align:center; font-size:1.25rem; margin-top:25px;">
-            <strong>Za 1.000 aktivnih korisnika:</strong> 7.150 € mjesečno<br>
-            <span style="color:#667eea; font-size:1.05rem;">Povrat ulaganja moguć u manje od 3 mjeseca.</span>
+        <p style="margin-top:18px; font-size:0.95rem;">
+            Za 1.000 aktivnih korisnika projekcija je <strong>7.150 € mjesečno</strong> prihoda, što omogućuje povrat
+            početne investicije u manje od tri mjeseca.
         </p>
+    </div>
+</section>
+
+<!-- VIDEO DEMO – CINEMATIC -->
+<section id="video">
+    <div class="section-card">
+        <h2 class="section-title">Pogledaj kako izgleda MoodFit iskustvo</h2>
+        <p class="section-sub">
+            Kratki demo AI aplikacije za mentalno zdravlje mladih – konceptualno identičan MoodFitu: praćenje emocija, vizualni grafovi i digitalni podržavajući asistent.
+        </p>
+
+        <div class="video-shell">
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/U49gU7dnkiI"
+                    title="MyMentalHealth App Demo - AI Emotional Support"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="video-overlay"></div>
+        </div>
     </div>
 </section>
 
 <!-- KONTAKT -->
-<section id="kontakt" class="high-contrast-section">
-    <h2 class="section-title section-title-high-contrast">Zainteresirani za Ulaganje?</h2>
-
-    <div class="form-container">
-        <p style="text-align:center; font-size:1.2rem; margin-bottom:30px;">
-            Unesite podatke i odgovorit ću u roku od <strong>24 sata</strong> s detaljnim planom i projekcijama.
+<section id="kontakt">
+    <div class="section-card">
+        <h2 class="section-title">Zainteresirani za ulaganje?</h2>
+        <p class="section-sub">
+            Ispunite upit ispod i dobit ćete detaljan PDF s projekcijama, planom razvoja i mogućim udjelom u MoodFit projektu.
         </p>
 
-        <form id="contactForm">
-            <div class="form-group">
-                <input type="text" placeholder="Ime i prezime" required>
+        <div class="form-grid">
+            <div class="form-card">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Ime i prezime" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email adresa" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Telefon (opcionalno)">
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Vaša poruka, okvirni iznos ulaganja ili pitanja..." required></textarea>
+                    </div>
+                    <button type="submit" class="hero-main-btn" style="width:100%; justify-content:center;">
+                        <i class="fas fa-paper-plane"></i> Pošalji upit za ulaganje
+                    </button>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="email" placeholder="Email adresa" required>
+
+            <div class="form-card">
+                <h3 style="margin-bottom:10px; font-size:1rem;">Zašto sada?</h3>
+                <p style="font-size:0.9rem; color:#e5e7eb; margin-bottom:12px;">
+                    • Mentalno zdravlje mladih je jedno od najbrže rastućih tržišta u svijetu aplikacija.<br>
+                    • MoodFit je školski, ali ozbiljno strukturiran projekt – jasan budžet, monetizacija i ciljna grupa.<br>
+                    • Rani investitor ima priliku sudjelovati u definiranju produkta i brenda.
+                </p>
+                <p style="font-size:0.9rem; color:#9ca3af;">
+                    Mentor: Goran Gomaz<br>
+                    Projekt: MoodFit – mentalno zdravlje mladih<br>
+                    Škola: Tehnička škola Ruđera Boškovića, Zagreb
+                </p>
             </div>
-            <div class="form-group">
-                <input type="tel" placeholder="Telefon (opcionalno)">
-            </div>
-            <div class="form-group">
-                <textarea rows="6" placeholder="Vaša poruka, iznos ulaganja ili pitanja..." required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">
-                <i class="fas fa-paper-plane"></i> Pošalji upit za ulaganje
-            </button>
-        </form>
+        </div>
     </div>
 </section>
 
 <footer>
-    <div class="footer-content">
-        <p style="font-size:1.05rem; margin-bottom:10px;">
-            <i class="fas fa-heart" style="color:#ff6b6b;"></i>
-            &copy; 2026 Dario Vrankovečki | MoodFit projekt
-        </p>
-        <p style="font-size:0.98rem; margin-bottom:16px;">Mentor: Goran Gomaz</p>
-        <div class="school-name">
-            <strong>Tehnička škola Ruđera Boškovića</strong><br>
-            Zagreb, Hrvatska
-        </div>
-    </div>
+    <p>&copy; 2026 Dario Vrankovečki | MoodFit projekt</p>
 </footer>
 
 <script>
@@ -518,9 +769,9 @@ new Chart(ctx, {
         datasets: [{
             label: 'Mjesečni prihod (€)',
             data: [4500, 900, 1750],
-            backgroundColor: ['#667eea', '#764ba2', '#ff6b6b'],
-            borderColor: ['#5a67d8', '#6b46c1', '#fc8181'],
-            borderRadius: 14,
+            backgroundColor: ['#38bdf8', '#8b5cf6', '#f97316'],
+            borderColor: ['#0ea5e9', '#7c3aed', '#ea580c'],
+            borderRadius: 12,
             borderSkipped: false
         }]
     },
@@ -531,46 +782,36 @@ new Chart(ctx, {
         scales: {
             y: {
                 beginAtZero: true,
-                grid: { color: 'rgba(0,0,0,0.08)' },
-                ticks: { font: { size: 14, weight: '600' }, color: '#2d3748' }
+                grid: { color: 'rgba(148,163,184,0.35)' },
+                ticks: { color: '#e5e7eb', font: { size: 12 } }
             },
             x: {
                 grid: { display: false },
-                ticks: { font: { size: 14, weight: '600' }, color: '#2d3748' }
+                ticks: { color: '#e5e7eb', font: { size: 12 } }
             }
-        },
-        animation: {
-            duration: 2000,
-            easing: 'easeOutQuart'
         }
     }
 });
 
-// Submit forma
+// Smooth scroll helper
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Form submit
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const button = this.querySelector('button');
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Šaljem...';
-    button.disabled = true;
+    const btn = this.querySelector('button');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Šaljem...';
+    btn.disabled = true;
 
     setTimeout(() => {
-        alert('🎉 Hvala! Vaš upit za ulaganje u MoodFit je poslan. Kontaktirat ću vas u roku od 24h s detaljnim planom i projekcijama!');
-        button.innerHTML = '<i class="fas fa-paper-plane"></i> Pošalji upit za ulaganje';
-        button.disabled = false;
+        alert('🎉 Hvala! Vaš upit za ulaganje u MoodFit je poslan. Odgovor stiže unutar 24 sata.');
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Pošalji upit za ulaganje';
+        btn.disabled = false;
         this.reset();
     }, 1500);
-});
-
-// Smooth scroll CTA
-document.querySelector('.cta-button').addEventListener('click', function(e) {
-    e.preventDefault();
-    const kontakt = document.getElementById('kontakt');
-    if (kontakt) {
-        kontakt.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
 });
 </script>
 
