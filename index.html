@@ -54,11 +54,9 @@ section { padding: 100px 20px; max-width: 1400px; margin: auto; }
     font-size: clamp(2rem, 4vw, 3rem); 
     text-align: center; 
     margin-bottom: 60px; 
-    background: linear-gradient(45deg, #667eea, #764ba2); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    background-clip: text;
+    font-weight: 700;
     position: relative;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 .section-title::after {
     content: '';
@@ -71,18 +69,55 @@ section { padding: 100px 20px; max-width: 1400px; margin: auto; }
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border-radius: 2px;
 }
-/* POBOLJŠANI KONTRAST ZA SVJETLE SEKCIJE */
-.high-contrast-bg {
+/* MASTERCLASS KONTRAST - SVE SEKCIJE BIJELE */
+.high-contrast-section {
     background: rgba(255,255,255,0.98) !important;
     position: relative;
 }
-.high-contrast-bg::before {
+.high-contrast-section::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
     border-radius: 25px;
     z-index: -1;
+}
+.section-title-high-contrast {
+    background: linear-gradient(45deg, #1a365d, #2d3748) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: #1a365d !important;
+}
+/* VIDEO STYLES */
+.video-container {
+    position: relative;
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.3);
+    background: white;
+}
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.video-title {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-top: 25px;
+    font-weight: 600;
 }
 .card { 
     background: rgba(255,255,255,0.98); 
@@ -161,6 +196,7 @@ input, textarea {
     background: white;
     color: #2d3748;
 }
+input::placeholder, textarea::placeholder { color: #a0aec0; }
 input:focus, textarea:focus { 
     outline: none; 
     border-color: #667eea; 
@@ -191,18 +227,20 @@ footer {
     font-size: 1.3rem; 
     font-weight: 600; 
     margin-top: 30px; 
-    padding: 20px; 
-    background: rgba(255,255,255,0.1); 
+    padding: 25px; 
+    background: rgba(255,255,255,0.15); 
     border-radius: 15px; 
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.card, .feature-card, .form-container { animation: fadeInUp 0.8s ease forwards; }
+.card, .feature-card, .form-container, .video-container { animation: fadeInUp 0.8s ease forwards; }
 @media (max-width: 768px) { 
     section { padding: 70px 20px; } 
     .card, .form-container { padding: 40px 30px; }
     .hero-title { font-size: 2.5rem; }
     footer { padding: 40px 20px 30px; }
+    .video-container { margin: 20px auto; }
 }
 .pulse { animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,107,107,0.7); } 70% { box-shadow: 0 0 0 20px rgba(255,107,107,0); } 100% { box-shadow: 0 0 0 0 rgba(255,107,107,0); } }
@@ -215,8 +253,27 @@ footer {
     <a href="#kontakt" class="cta-button pulse"><i class="fas fa-rocket"></i> Postani Investitor Sada</a>
 </header>
 
-<section id="opis">
-    <h2 class="section-title">O MoodFit Aplikaciji</h2>
+<!-- SVE SEKCIJE SADA IMAJU MASTERCLASS KONTRAST -->
+<section id="opis" class="high-contrast-section">
+    <h2 class="section-title section-title-high-contrast">O MoodFit Aplikaciji</h2>
+    
+    <!-- 🎥 INFORMATIVNI VIDEO DEMO - AI Emotional Support App za mlade (kao MoodFit) -->
+    <div class="video-container">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/U49gU7dnkiI" 
+                    title="MyMentalHealth App Demo - AI Emotional Support za mlade (kao MoodFit)" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <p class="video-title">
+            <i class="fas fa-play-circle"></i> 
+            Pogledajte demo slične AI aplikacije za praćenje emocija i mentalno zdravlje mladih – 
+            <strong>baš kao MoodFit!</strong>
+        </p>
+    </div>
+    
     <div class="card">
         <p><strong>MoodFit</strong> je revolucionarna mobilna aplikacija za praćenje raspoloženja koja kombinira dnevno bilježenje emocija, napredne grafove trendova, personalizirane vježbe disanja i AI motivacijske poruke. Naša ciljana publika su <strong>učenici, studenti i mladi profesionalci</strong> koji se bore sa stresom svakodnevnice.</p>
         <div class="feature-grid">
@@ -239,8 +296,8 @@ footer {
     </div>
 </section>
 
-<section id="plan" class="high-contrast-bg">
-    <h2 class="section-title">Poslovni Plan</h2>
+<section id="plan" class="high-contrast-section">
+    <h2 class="section-title section-title-high-contrast">Poslovni Plan</h2>
     <div class="card">
         <h3 style="font-size: 2rem; text-align: center; margin-bottom: 40px; color: #1a365d !important;"><i class="fas fa-bullseye"></i> Strategija Monetizacije</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
@@ -268,8 +325,8 @@ footer {
     </div>
 </section>
 
-<section id="ulaganja">
-    <h2 class="section-title">Potrebna Ulaganja</h2>
+<section id="ulaganja" class="high-contrast-section">
+    <h2 class="section-title section-title-high-contrast">Potrebna Ulaganja</h2>
     <div class="card">
         <table>
             <tr><th><i class="fas fa-code"></i> Razvoj aplikacije</th><th>Procjena Troška (€)</th></tr>
@@ -285,8 +342,8 @@ footer {
     </div>
 </section>
 
-<section id="prihodi" class="high-contrast-bg">
-    <h2 class="section-title">Potencijalni Prihodi</h2>
+<section id="prihodi" class="high-contrast-section">
+    <h2 class="section-title section-title-high-contrast">Potencijalni Prihodi</h2>
     <div class="card">
         <div class="chart-container">
             <canvas id="prihodChart"></canvas>
@@ -298,8 +355,8 @@ footer {
     </div>
 </section>
 
-<section id="kontakt" class="high-contrast-bg">
-    <h2 class="section-title">Zainteresirani za Ulaganje?</h2>
+<section id="kontakt" class="high-contrast-section">
+    <h2 class="section-title section-title-high-contrast">Zainteresirani za Ulaganje?</h2>
     <div class="form-container">
         <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px; color: #2d3748;">
             Unesite podatke i odgovorit ću u <strong>24h</strong> s detaljnim planom
@@ -391,7 +448,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     }, 1500);
 });
 
-// POPRAVLJEN SMOOTH SCROLL - radi 100%
+// SAVRŠENI SMOOTH SCROLL
 document.querySelector('.cta-button').addEventListener('click', function(e) {
     e.preventDefault();
     const kontaktSection = document.getElementById('kontakt');
